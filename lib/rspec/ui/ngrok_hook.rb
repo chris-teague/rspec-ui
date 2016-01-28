@@ -1,5 +1,5 @@
-require 'ngrok/tunnel'
 require 'httparty'
+require 'locoyo'
 
 module RSpec
   module Ui
@@ -7,38 +7,35 @@ module RSpec
     class NgrokHook
 
       ConfigFile = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..', 'config', 'ngrok-config-testing'))
-      BrowserArmyAPIKey = '2e679057-4260-40af-a358-d55a40471f30'
-      BrowserArmyURI    = 'localhost:3000'
-
       @@current_port = nil
 
       def self.update_port(port)
         return if @@current_port == port
         shutdown
-        Ngrok::Tunnel.start(
-          config: ConfigFile,
-          port:   port
+
+        tunnel = Locoyo::Tunnel.new(
+          port:      port,
+          address:  '127.0.0.1',
+          protocol: 'http'
         )
-        update_browser_army
-        puts "PORT: #{port}"
+        tunnel.run
+
+        sleep(3)
+        subdomain = tunnel.get_subdomain
+        update_browser_army(subdomain)
+
+        puts "View on http://uxspec.com/#{UxSpec.configuration.token}"
         @@current_port = port
       end
 
       def self.shutdown
-        Ngrok::Tunnel.stop
+        # TODO
       end
 
-      def self.update_browser_army
-        if Ngrok::Tunnel.status == :running
-          HTTParty.patch("http://#{BrowserArmyURI}/#{BrowserArmyAPIKey}.json", body: { project: { ngrok_id: ngrok_id }}).body
-        else
-          puts 'Not running, doh!'
-        end
+      def self.update_browser_army(subdomain)
+        HTTParty.patch("https://#{UxSpec.configuration.uxspec_uri}/#{UxSpec.configuration.token}.json", body: { project: { ngrok_id: subdomain, ngrok_port: @@current_port }}).body
       end
 
-      def self.ngrok_id
-        Ngrok::Tunnel.ngrok_url.match(/http[s]?:\/\/(\w*)./)[1]
-      end
     end
 
   end

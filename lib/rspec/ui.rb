@@ -33,3 +33,36 @@ if Rails.env.test?
     # end
   end
 end
+
+module UxSpec
+  #
+  # Allow external configuration of UXSpec Token & URI (for self hosting)
+  # potentially more in future.
+  #
+  # e.g.
+  #
+  #     UxSpec.configure do |config|
+  #       config.token = 'your_token_here'
+  #     end
+  #
+  # Reference: https://robots.thoughtbot.com/mygem-configure-block
+  #
+  class << self
+    attr_accessor :configuration
+  end
+
+  def self.configure
+    self.configuration ||= Configuration.new
+    yield(configuration)
+  end
+
+  class Configuration
+    attr_accessor :token, :uxspec_uri
+
+    def initialize
+      @token      = nil
+      @uxspec_uri = 'uxspec.com'
+    end
+  end
+
+end
