@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["chris@cteague.com.au"]
   spec.summary       = %q{Build UI tests for manual validation across multiple devices.}
   spec.description   = %q{Build UI tests for manual validation across multiple devices.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/chris-teague/rspec-ui"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -18,13 +18,13 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.7"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec-core"
-  spec.add_development_dependency "capybara"
-  spec.add_development_dependency "pry"
+  spec.add_development_dependency 'bundler', '~> 1.7'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rspec-core', '~> 0'
+  spec.add_development_dependency 'capybara', '~> 0'
+  spec.add_development_dependency 'pry', '~> 0'
 
-  spec.add_runtime_dependency     "locoyo"
-  spec.add_runtime_dependency     "httparty"
-  spec.add_runtime_dependency     "rspec"
+  spec.add_runtime_dependency 'locoyo', '~> 0'
+  spec.add_runtime_dependency 'httparty', '~> 0'
+  spec.add_runtime_dependency 'rspec', '~> 0'
 end
