@@ -1,10 +1,9 @@
 require "pry"
-
 require "rails"
 require "capybara"
 require "rspec/ui/version"
 require "rspec/ui/ngrok_hook"
-require 'rspec/ui/dsl'
+require 'rspec/ui/context'
 require 'rspec'
 
 class RackTestWithServer < Capybara::RackTest::Driver
@@ -24,6 +23,8 @@ if Rails.env.test?
     config.around(:example) do |ex|
       Capybara.current_session.driver.header('X-Frame-Options', 'ALLOW-FROM https://uxspec.com')
       RSpec::Ui::NgrokHook.update_port(Capybara.current_session.server.port)
+
+      # if VCR present, temporarily disable the localhost & uxspec addresses
       ex.run
       sleep(500)
     end

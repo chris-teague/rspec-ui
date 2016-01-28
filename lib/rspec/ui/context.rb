@@ -1,9 +1,11 @@
 module RSpec
   module Ui
-    module DSL
+    module Context
+
       def test_ui
-       # binding.pry
+        #binding.pry
       end
+
     end
   end
 end
