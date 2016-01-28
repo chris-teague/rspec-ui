@@ -1,6 +1,7 @@
 # Rspec::Ui
 
-TODO: Write a gem description
+Gem that integrates with Rspec & UXSpec.com to help you build a suite of UI & UX
+features to test across multiple devices.
 
 ## Installation
 
@@ -20,7 +21,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+
+In your spec helper file:
+
+```ruby
+require "rspec/ui"
+
+UxSpec.configure do |config|
+  config.token = 'your_token_here'
+end
+```
 
 ## Contributing
 
