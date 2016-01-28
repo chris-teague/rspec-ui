@@ -23,7 +23,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec-core"
   spec.add_development_dependency "capybara"
   spec.add_development_dependency "pry"
-  spec.add_dependency             "ngrok-tunnel"
-  spec.add_dependency             "httparty"
-  spec.add_dependency             "rspec"
+
+  spec.add_runtime_dependency     "locoyo"
+  spec.add_runtime_dependency     "httparty"
+  spec.add_runtime_dependency     "rspec"
 end
