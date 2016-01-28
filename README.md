@@ -3,6 +3,8 @@
 Gem that integrates with Rspec & UXSpec.com to help you build a suite of UI & UX
 features to test across multiple devices.
 
+Warning: very much ALPHA software, do not use yet!
+
 ## Installation
 
 Add this line to your application's Gemfile:
