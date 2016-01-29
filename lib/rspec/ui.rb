@@ -4,7 +4,6 @@ require "capybara"
 require "rspec/ui/version"
 require "rspec/ui/ngrok_hook"
 require 'rspec/ui/context'
-require 'rspec'
 
 class RackTestWithServer < Capybara::RackTest::Driver
   def needs_server?;true;end
